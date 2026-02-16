@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <meta name="description" content="Production causal inference platform for marketing ROI optimization">
     <title>Causal-Flow | Marketing Campaign Analytics</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%23667eea' width='100' height='100' rx='15'/><text x='50' y='70' font-size='60' font-weight='900' fill='white' text-anchor='middle' font-family='Arial'>CF</text></svg>">
     <style>
@@ -16,9 +17,10 @@
             color: #e2e8f0;
             line-height: 1.6;
             overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
         }
         
-        /* Navigation */
+        /* Navigation - Mobile First */
         nav {
             position: fixed;
             top: 0;
@@ -32,7 +34,7 @@
         .nav-container {
             max-width: 1300px;
             margin: 0 auto;
-            padding: 0.75rem 2rem;
+            padding: 0.75rem 1rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -41,36 +43,37 @@
         .logo {
             display: flex;
             align-items: center;
-            gap: 0.75rem;
-            font-size: 1.25rem;
+            gap: 0.5rem;
+            font-size: 1.1rem;
             font-weight: 800;
             color: #fff;
         }
         
         .logo-icon {
-            width: 36px;
-            height: 36px;
+            width: 32px;
+            height: 32px;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1rem;
+            font-size: 0.9rem;
             font-weight: 900;
             color: white;
             box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
         }
         
         .export-btn {
-            padding: 0.5rem 1.25rem;
+            padding: 0.5rem 1rem;
             background: linear-gradient(135deg, #667eea, #764ba2);
             border: none;
             border-radius: 8px;
             color: white;
             font-weight: 600;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             cursor: pointer;
             transition: all 0.3s ease;
+            white-space: nowrap;
         }
         
         .export-btn:hover {
@@ -78,54 +81,53 @@
             box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
         }
         
-        /* Hero */
+        /* Hero - Mobile First */
         .hero {
-            min-height: 60vh;
+            min-height: 50vh;
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
-            padding: 6rem 2rem 3rem;
+            padding: 5rem 1rem 2rem;
             background: linear-gradient(180deg, #0a0e1a 0%, #12182b 100%);
         }
         
         .hero h1 {
-            font-size: 3.5rem;
+            font-size: 2.5rem;
             font-weight: 900;
             margin-bottom: 1rem;
             background: linear-gradient(135deg, #fff 0%, #a5b4fc 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            letter-spacing: -0.02em;
         }
         
         .hero-subtitle {
-            font-size: 1.15rem;
+            font-size: 1rem;
             color: #94a3b8;
-            margin-bottom: 2rem;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
+            margin-bottom: 1.5rem;
+            line-height: 1.5;
         }
         
-        /* Stats Grid */
+        /* Stats Grid - Mobile First */
         .stats-section {
-            padding: 2.5rem 2rem;
+            padding: 2rem 1rem;
             max-width: 1300px;
             margin: 0 auto;
         }
         
         .stats-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 1.5rem;
+            grid-template-columns: 1fr;
+            gap: 1rem;
         }
         
         .stat-card {
             background: rgba(255, 255, 255, 0.03);
             border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: 16px;
-            padding: 1.75rem;
+            padding: 1.5rem;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
         }
@@ -143,10 +145,8 @@
             transition: transform 0.4s ease;
         }
         
-        .stat-card:hover {
-            transform: translateY(-4px);
-            background: rgba(255, 255, 255, 0.05);
-            border-color: rgba(102, 126, 234, 0.3);
+        .stat-card:active {
+            transform: scale(0.98);
         }
         
         .stat-card:hover::before {
@@ -154,7 +154,7 @@
         }
         
         .stat-value {
-            font-size: 2.5rem;
+            font-size: 2rem;
             font-weight: 900;
             background: linear-gradient(135deg, #667eea, #764ba2);
             -webkit-background-clip: text;
@@ -164,51 +164,58 @@
         }
         
         .stat-label {
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             color: #cbd5e1;
             font-weight: 500;
         }
         
         .stat-ci {
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             color: #64748b;
             margin-top: 0.25rem;
             font-family: 'Monaco', monospace;
         }
         
-        /* Content Section */
+        /* Content Section - Mobile First */
         .content-section {
-            padding: 2.5rem 2rem;
+            padding: 2rem 1rem;
             max-width: 1300px;
             margin: 0 auto;
         }
         
         .tabs {
             display: flex;
-            gap: 0.75rem;
-            margin-bottom: 2rem;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
             background: rgba(255, 255, 255, 0.03);
             padding: 0.4rem;
             border-radius: 14px;
             border: 1px solid rgba(255, 255, 255, 0.08);
             overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+        
+        .tabs::-webkit-scrollbar {
+            display: none;
         }
         
         .tab {
-            padding: 0.75rem 1.5rem;
+            padding: 0.75rem 1.25rem;
             border: none;
             background: transparent;
             color: #94a3b8;
             cursor: pointer;
             border-radius: 10px;
             font-weight: 600;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             transition: all 0.2s ease;
             white-space: nowrap;
+            flex-shrink: 0;
+            touch-action: manipulation;
         }
         
-        .tab:hover {
-            background: rgba(255, 255, 255, 0.05);
+        .tab:active {
+            transform: scale(0.95);
         }
         
         .tab.active {
@@ -220,27 +227,27 @@
             background: rgba(255, 255, 255, 0.03);
             border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: 20px;
-            padding: 2.5rem;
+            padding: 1.5rem;
             margin-bottom: 1.5rem;
         }
         
         .section-title {
-            font-size: 2rem;
+            font-size: 1.5rem;
             font-weight: 800;
             margin-bottom: 1.5rem;
             color: #fff;
         }
         
-        /* ROI Calculator */
+        /* ROI Calculator - Mobile First */
         .roi-calculator {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            margin: 2rem 0;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            margin: 1.5rem 0;
         }
         
         .slider-group {
-            margin: 1.5rem 0;
+            margin: 1.25rem 0;
         }
         
         .slider-label {
@@ -248,11 +255,14 @@
             margin-bottom: 0.75rem;
             display: flex;
             justify-content: space-between;
-            font-size: 0.95rem;
+            align-items: center;
+            font-size: 0.9rem;
+            flex-wrap: wrap;
+            gap: 0.5rem;
         }
         
         .slider-value {
-            font-size: 1.5rem;
+            font-size: 1.25rem;
             color: #667eea;
             font-weight: 800;
             font-family: 'Monaco', monospace;
@@ -260,17 +270,18 @@
         
         .slider {
             width: 100%;
-            height: 8px;
-            border-radius: 4px;
+            height: 10px;
+            border-radius: 5px;
             background: rgba(255, 255, 255, 0.1);
             outline: none;
             -webkit-appearance: none;
+            touch-action: pan-y;
         }
         
         .slider::-webkit-slider-thumb {
             -webkit-appearance: none;
-            width: 24px;
-            height: 24px;
+            width: 28px;
+            height: 28px;
             border-radius: 50%;
             background: linear-gradient(135deg, #667eea, #764ba2);
             cursor: pointer;
@@ -278,35 +289,42 @@
             transition: transform 0.2s ease;
         }
         
-        .slider::-webkit-slider-thumb:hover {
-            transform: scale(1.15);
+        .slider:active::-webkit-slider-thumb {
+            transform: scale(1.2);
         }
         
         .slider::-moz-range-thumb {
-            width: 24px;
-            height: 24px;
+            width: 28px;
+            height: 28px;
             border-radius: 50%;
             background: linear-gradient(135deg, #667eea, #764ba2);
             cursor: pointer;
             border: none;
         }
         
+        .slider-note {
+            font-size: 0.75rem;
+            color: #64748b;
+            margin-top: 0.5rem;
+            line-height: 1.4;
+        }
+        
         .roi-display {
             background: linear-gradient(135deg, #667eea, #764ba2);
             border-radius: 20px;
-            padding: 3rem;
+            padding: 2rem 1.5rem;
             text-align: center;
             box-shadow: 0 12px 32px rgba(102, 126, 234, 0.3);
         }
         
         .roi-label {
-            font-size: 1.1rem;
+            font-size: 1rem;
             opacity: 0.9;
             margin-bottom: 1rem;
         }
         
         .roi-value {
-            font-size: 4.5rem;
+            font-size: 3rem;
             font-weight: 900;
             margin: 1rem 0;
             font-family: 'Monaco', monospace;
@@ -315,8 +333,8 @@
         .roi-details {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 2rem;
-            margin-top: 2rem;
+            gap: 1rem;
+            margin-top: 1.5rem;
         }
         
         .roi-detail-item {
@@ -324,53 +342,53 @@
         }
         
         .roi-detail-value {
-            font-size: 1.8rem;
+            font-size: 1.3rem;
             font-weight: 700;
             font-family: 'Monaco', monospace;
         }
         
         .roi-detail-label {
-            font-size: 0.85rem;
+            font-size: 0.75rem;
             opacity: 0.8;
             margin-top: 0.25rem;
         }
         
-        /* Diagnostic Charts */
+        /* Diagnostic Charts - Mobile First */
         .diagnostic-chart {
             background: rgba(0, 0, 0, 0.2);
             border-radius: 12px;
-            padding: 2rem;
-            margin: 2rem 0;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
         }
         
         .chart-title {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             font-weight: 700;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
             color: #fff;
         }
         
         .balance-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1.5rem;
+            grid-template-columns: 1fr;
+            gap: 1rem;
         }
         
         .balance-item {
             background: rgba(255, 255, 255, 0.03);
-            padding: 1.5rem;
+            padding: 1.25rem;
             border-radius: 12px;
             border: 1px solid rgba(255, 255, 255, 0.08);
         }
         
         .balance-label {
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             color: #94a3b8;
             margin-bottom: 0.5rem;
         }
         
         .balance-value {
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             font-weight: 700;
             margin-bottom: 0.25rem;
         }
@@ -384,16 +402,16 @@
         }
         
         .balance-change {
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             color: #10b981;
         }
         
-        /* Bar Chart */
+        /* Bar Chart - Mobile Optimized */
         .bar-chart {
             display: flex;
             flex-direction: column;
-            gap: 1.25rem;
-            margin: 2rem 0;
+            gap: 1rem;
+            margin: 1.5rem 0;
         }
         
         .bar-item {
@@ -405,12 +423,14 @@
             justify-content: space-between;
             margin-bottom: 0.5rem;
             font-weight: 600;
-            font-size: 0.95rem;
+            font-size: 0.85rem;
+            gap: 0.5rem;
+            flex-wrap: wrap;
         }
         
         .bar-bg {
             background: rgba(255, 255, 255, 0.05);
-            height: 44px;
+            height: 40px;
             border-radius: 8px;
             overflow: hidden;
         }
@@ -421,50 +441,45 @@
             display: flex;
             align-items: center;
             justify-content: flex-end;
-            padding-right: 1rem;
+            padding-right: 0.75rem;
             color: white;
             font-weight: 700;
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
         }
         
-        .bar-fill:hover {
-            filter: brightness(1.15);
-        }
-        
-        /* Table */
+        /* Table - Mobile Optimized */
         .data-table {
             width: 100%;
             border-collapse: collapse;
-            margin: 2rem 0;
+            margin: 1.5rem 0;
+            font-size: 0.85rem;
         }
         
         .data-table th {
-            padding: 1rem;
+            padding: 0.75rem;
             text-align: left;
             font-weight: 700;
             color: #667eea;
             background: rgba(102, 126, 234, 0.08);
-            font-size: 0.9rem;
         }
         
         .data-table td {
-            padding: 1rem;
+            padding: 0.75rem;
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            font-size: 0.95rem;
         }
         
-        .data-table tr:hover {
-            background: rgba(102, 126, 234, 0.05);
+        .data-table tr:active {
+            background: rgba(102, 126, 234, 0.1);
         }
         
-        /* Insight Box */
+        /* Insight Box - Mobile Optimized */
         .insight-box {
             background: rgba(16, 185, 129, 0.08);
             border-left: 3px solid #10b981;
-            padding: 1.5rem;
+            padding: 1.25rem;
             border-radius: 8px;
-            margin: 2rem 0;
+            margin: 1.5rem 0;
         }
         
         .insight-box.warning {
@@ -473,7 +488,7 @@
         }
         
         .insight-title {
-            font-size: 1.1rem;
+            font-size: 1rem;
             font-weight: 700;
             margin-bottom: 0.75rem;
             color: #10b981;
@@ -483,47 +498,135 @@
             color: #ef4444;
         }
         
-        /* Footer */
+        .insight-box p {
+            font-size: 0.85rem;
+            line-height: 1.6;
+        }
+        
+        /* Footer - Mobile Optimized */
         footer {
             background: rgba(0, 0, 0, 0.4);
             border-top: 1px solid rgba(255, 255, 255, 0.08);
-            padding: 3rem 2rem 2rem;
-            margin-top: 4rem;
+            padding: 2rem 1rem 1.5rem;
+            margin-top: 3rem;
             text-align: center;
         }
         
+        footer p {
+            font-size: 0.85rem;
+            line-height: 1.6;
+        }
+        
         .creator {
-            margin-top: 2rem;
-            padding-top: 2rem;
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
             border-top: 1px solid rgba(255, 255, 255, 0.08);
         }
         
         .creator-name {
             color: #667eea;
             font-weight: 700;
-            font-size: 1.1rem;
+            font-size: 1rem;
         }
         
         .hidden { display: none; }
         
-        /* Confidence Interval Badge */
+        /* CI Badge */
         .ci-badge {
             display: inline-block;
             background: rgba(59, 130, 246, 0.2);
             color: #60a5fa;
-            padding: 0.25rem 0.75rem;
+            padding: 0.2rem 0.6rem;
             border-radius: 12px;
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             font-weight: 600;
-            margin-left: 0.5rem;
+            margin-left: 0.25rem;
             font-family: 'Monaco', monospace;
         }
         
-        @media (max-width: 968px) {
-            .roi-calculator {
-                grid-template-columns: 1fr;
+        /* Tablet Breakpoint */
+        @media (min-width: 600px) {
+            .hero h1 { font-size: 3rem; }
+            .hero-subtitle { font-size: 1.1rem; }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 1.25rem; }
+            .stat-value { font-size: 2.25rem; }
+            .content-card { padding: 2rem; }
+            .section-title { font-size: 1.75rem; }
+            .balance-grid { grid-template-columns: repeat(2, 1fr); }
+            .roi-value { font-size: 3.5rem; }
+            .roi-details { grid-template-columns: repeat(4, 1fr); }
+            .bar-header { font-size: 0.9rem; }
+            .data-table { font-size: 0.9rem; }
+        }
+        
+        /* Desktop Breakpoint */
+        @media (min-width: 968px) {
+            .nav-container { padding: 0.75rem 2rem; }
+            .logo { font-size: 1.25rem; }
+            .export-btn { font-size: 0.9rem; padding: 0.5rem 1.25rem; }
+            .hero { min-height: 60vh; padding: 6rem 2rem 3rem; }
+            .hero h1 { font-size: 3.5rem; }
+            .hero-subtitle { font-size: 1.15rem; }
+            .stats-section { padding: 2.5rem 2rem; }
+            .stats-grid { grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
+            .stat-card { padding: 1.75rem; }
+            .stat-value { font-size: 2.5rem; }
+            .content-section { padding: 2.5rem 2rem; }
+            .content-card { padding: 2.5rem; }
+            .section-title { font-size: 2rem; }
+            .roi-calculator { grid-template-columns: 1fr 1fr; gap: 3rem; }
+            .roi-display { padding: 3rem; }
+            .roi-value { font-size: 4.5rem; }
+            .balance-grid { grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
+            .bar-chart { gap: 1.25rem; }
+            .bar-bg { height: 44px; }
+            .bar-fill { font-size: 0.9rem; }
+            .data-table { font-size: 0.95rem; }
+            .insight-box { padding: 1.5rem; }
+            .insight-box p { font-size: 0.95rem; }
+            footer { padding: 3rem 2rem 2rem; }
+        }
+        
+        /* Comparison grid for mobile */
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        
+        @media (min-width: 600px) {
+            .comparison-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        
+        .comparison-box {
+            background: rgba(255, 255, 255, 0.02);
+            padding: 1.25rem;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        
+        .comparison-title {
+            font-size: 0.85rem;
+            color: #94a3b8;
+            margin-bottom: 0.75rem;
+        }
+        
+        .comparison-content {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 1rem;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            line-height: 1.6;
+        }
+        
+        /* Touch feedback */
+        @media (hover: none) and (pointer: coarse) {
+            .stat-card:active,
+            .tab:active,
+            .export-btn:active {
+                opacity: 0.8;
             }
-            .hero h1 { font-size: 2.5rem; }
         }
     </style>
 </head>
@@ -534,7 +637,7 @@
                 <div class="logo-icon">CF</div>
                 <span>Causal-Flow</span>
             </div>
-            <button class="export-btn" onclick="exportReport()">📊 Export Report</button>
+            <button class="export-btn" onclick="exportReport()">📊 Export</button>
         </div>
     </nav>
 
@@ -549,7 +652,7 @@
         <div class="stats-grid">
             <div class="stat-card">
                 <div class="stat-value" id="stat-lift">0.14%</div>
-                <div class="stat-label">True Causal Lift (PSM)</div>
+                <div class="stat-label">True Causal Lift</div>
                 <div class="stat-ci">95% CI: [0.09%, 0.19%]</div>
             </div>
             <div class="stat-card">
@@ -560,19 +663,19 @@
             <div class="stat-card">
                 <div class="stat-value" id="stat-roi" style="color: #ef4444;">-27.6%</div>
                 <div class="stat-label">Campaign ROI</div>
-                <div class="stat-ci">Cost: $4,279 | Decision: Don't scale</div>
+                <div class="stat-ci">Decision: Don't scale</div>
             </div>
             <div class="stat-card">
                 <div class="stat-value">+142%</div>
                 <div class="stat-label">Targeted ROI</div>
-                <div class="stat-ci">High + Low Value segments</div>
+                <div class="stat-ci">High + Low Value</div>
             </div>
         </div>
     </section>
 
     <section class="content-section">
         <div class="tabs">
-            <button class="tab active" onclick="showTab('calculator')">📊 ROI Calculator</button>
+            <button class="tab active" onclick="showTab('calculator')">📊 Calculator</button>
             <button class="tab" onclick="showTab('diagnostics')">✓ Diagnostics</button>
             <button class="tab" onclick="showTab('segments')">🎯 Segments</button>
             <button class="tab" onclick="showTab('methods')">🔬 Methods</button>
@@ -585,7 +688,7 @@
                 
                 <div class="roi-calculator">
                     <div>
-                        <h3 style="font-size: 1.3rem; margin-bottom: 1.5rem; color: #fff;">Adjust Model Parameters</h3>
+                        <h3 style="font-size: 1.2rem; margin-bottom: 1.25rem; color: #fff;">Model Parameters</h3>
                         
                         <div class="slider-group">
                             <div class="slider-label">
@@ -607,12 +710,12 @@
                         
                         <div class="slider-group">
                             <div class="slider-label">
-                                <span>Expected Lift Shrinkage</span>
+                                <span>Lift Shrinkage</span>
                                 <span class="slider-value"><span id="shrink-display">0</span>%</span>
                             </div>
                             <input type="range" min="0" max="50" step="5" value="0" class="slider" id="shrink-slider"
                                    oninput="updateROI()">
-                            <div style="font-size: 0.8rem; color: #64748b; margin-top: 0.5rem;">
+                            <div class="slider-note">
                                 Production effects often shrink 10-30% vs. test
                             </div>
                         </div>
@@ -644,11 +747,11 @@
 
                 <div class="insight-box">
                     <div class="insight-title">💡 Sensitivity Findings</div>
-                    <p style="line-height: 1.7; font-size: 0.95rem;" id="sensitivity-insight">
-                        At baseline parameters, campaign loses money. Break-even requires either:
-                        <br>• Cost reduction to <strong>$0.072/email</strong> (28% cheaper)
-                        <br>• ARPU increase to <strong>$69</strong> (38% higher)
-                        <br>• Or better targeting (High+Low segments: +142% ROI)
+                    <p id="sensitivity-insight">
+                        At baseline parameters, campaign loses money. Break-even requires either:<br>
+                        • Cost reduction to <strong>$0.072/email</strong> (28% cheaper)<br>
+                        • ARPU increase to <strong>$69</strong> (38% higher)<br>
+                        • Or better targeting (High+Low segments: +142% ROI)
                     </p>
                 </div>
             </div>
@@ -660,7 +763,7 @@
                 <h2 class="section-title">Assumption Validation</h2>
                 
                 <div class="diagnostic-chart">
-                    <div class="chart-title">Covariate Balance: Before vs After Matching</div>
+                    <div class="chart-title">Covariate Balance: Before vs After</div>
                     <div class="balance-grid">
                         <div class="balance-item">
                             <div class="balance-label">Purchase History</div>
@@ -683,85 +786,73 @@
                         <div class="balance-item">
                             <div class="balance-label">Match Quality</div>
                             <div class="balance-value good">100%</div>
-                            <div style="font-size: 0.85rem; color: #94a3b8; margin-top: 0.25rem;">
+                            <div style="font-size: 0.8rem; color: #94a3b8; margin-top: 0.25rem;">
                                 42,790 matched pairs
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <h3 style="font-size: 1.3rem; margin: 2.5rem 0 1.5rem; color: #fff;">Propensity Score Distribution</h3>
-                <div class="diagnostic-chart">
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
-                        <div>
-                            <div style="font-size: 0.9rem; color: #94a3b8; margin-bottom: 1rem;">
-                                <strong>Before Matching:</strong> Significant overlap but some imbalance
-                            </div>
-                            <div style="background: rgba(239, 68, 68, 0.1); padding: 1rem; border-radius: 8px; border-left: 3px solid #ef4444;">
-                                <div style="font-size: 0.85rem; color: #fca5a5;">
-                                    ⚠️ Treatment group skewed toward higher propensity scores
-                                    <br>Std. diff: 15.2% (>10% threshold)
-                                </div>
-                            </div>
+                <h3 style="font-size: 1.2rem; margin: 2rem 0 1rem; color: #fff;">Propensity Score Distribution</h3>
+                <div class="comparison-grid">
+                    <div class="comparison-box">
+                        <div class="comparison-title"><strong>Before Matching:</strong></div>
+                        <div class="comparison-content" style="background: rgba(239, 68, 68, 0.1); border-left: 3px solid #ef4444;">
+                            ⚠️ Treatment group skewed toward higher propensity scores<br>
+                            Std. diff: 15.2% (>10% threshold)
                         </div>
-                        <div>
-                            <div style="font-size: 0.9rem; color: #94a3b8; margin-bottom: 1rem;">
-                                <strong>After Matching:</strong> Perfect balance achieved
-                            </div>
-                            <div style="background: rgba(16, 185, 129, 0.1); padding: 1rem; border-radius: 8px; border-left: 3px solid #10b981;">
-                                <div style="font-size: 0.85rem; color: #6ee7b7;">
-                                    ✓ Distributions now identical
-                                    <br>Std. diff: 1.8% (excellent)
-                                    <br>All units within caliper (0.05)
-                                </div>
-                            </div>
+                    </div>
+                    <div class="comparison-box">
+                        <div class="comparison-title"><strong>After Matching:</strong></div>
+                        <div class="comparison-content" style="background: rgba(16, 185, 129, 0.1); border-left: 3px solid #10b981;">
+                            ✓ Distributions now identical<br>
+                            Std. diff: 1.8% (excellent)<br>
+                            All units within caliper (0.05)
                         </div>
                     </div>
                 </div>
 
-                <h3 style="font-size: 1.3rem; margin: 2.5rem 0 1.5rem; color: #fff;">Statistical Inference</h3>
-                <table class="data-table">
-                    <thead>
-                        <tr>
-                            <th>Method</th>
-                            <th>Estimate</th>
-                            <th>95% CI</th>
-                            <th>p-value</th>
-                            <th>Interpretation</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><strong>Naive</strong></td>
-                            <td style="font-size: 1.2rem; font-weight: 700;">0.17%</td>
-                            <td style="font-family: Monaco;">-</td>
-                            <td>-</td>
-                            <td style="color: #ef4444;">Biased (selection)</td>
-                        </tr>
-                        <tr>
-                            <td><strong>PSM (ATT)</strong></td>
-                            <td style="font-size: 1.2rem; font-weight: 700; color: #10b981;">0.14%</td>
-                            <td style="font-family: Monaco;">[0.09%, 0.19%]</td>
-                            <td style="font-family: Monaco;">0.023</td>
-                            <td style="color: #10b981;">Significant ✓</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Uplift (CATE)</strong></td>
-                            <td style="font-size: 1.2rem; font-weight: 700;">0.18%</td>
-                            <td style="font-family: Monaco;">[0.12%, 0.24%]</td>
-                            <td style="font-family: Monaco;">0.008</td>
-                            <td style="color: #10b981;">Highly sig. ✓</td>
-                        </tr>
-                    </tbody>
-                </table>
+                <h3 style="font-size: 1.2rem; margin: 2rem 0 1rem; color: #fff;">Statistical Inference</h3>
+                <div style="overflow-x: auto;">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Method</th>
+                                <th>Estimate</th>
+                                <th>95% CI</th>
+                                <th>p-value</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Naive</strong></td>
+                                <td style="font-size: 1.1rem; font-weight: 700;">0.17%</td>
+                                <td style="font-family: Monaco;">-</td>
+                                <td>-</td>
+                            </tr>
+                            <tr>
+                                <td><strong>PSM (ATT)</strong></td>
+                                <td style="font-size: 1.1rem; font-weight: 700; color: #10b981;">0.14%</td>
+                                <td style="font-family: Monaco; font-size: 0.75rem;">[0.09%, 0.19%]</td>
+                                <td style="font-family: Monaco;">0.023</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Uplift</strong></td>
+                                <td style="font-size: 1.1rem; font-weight: 700;">0.18%</td>
+                                <td style="font-family: Monaco; font-size: 0.75rem;">[0.12%, 0.24%]</td>
+                                <td style="font-family: Monaco;">0.008</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
 
                 <div class="insight-box">
                     <div class="insight-title">✓ Credibility Established</div>
-                    <p style="line-height: 1.7; font-size: 0.95rem;">
-                        <strong>1. Selection bias eliminated:</strong> Covariate balance improved 94% (all diffs &lt;10%)<br>
-                        <strong>2. Statistical significance:</strong> p=0.023 (reject null at α=0.05)<br>
-                        <strong>3. Confidence interval:</strong> True effect likely between 0.09% and 0.19%<br>
-                        <strong>4. Benchmark alignment:</strong> Matches published Hillstrom results (0.15-0.20%)
+                    <p>
+                        <strong>1. Selection bias eliminated:</strong> 94% improvement in balance<br>
+                        <strong>2. Statistical significance:</strong> p=0.023 (reject null)<br>
+                        <strong>3. Confidence interval:</strong> Effect likely [0.09%, 0.19%]<br>
+                        <strong>4. Benchmark alignment:</strong> Matches Hillstrom (0.15-0.20%)
                     </p>
                 </div>
             </div>
@@ -770,105 +861,103 @@
         <!-- Segments Tab -->
         <div id="segments-content" class="hidden">
             <div class="content-card">
-                <h2 class="section-title">Segment-Level Treatment Effects (CATE)</h2>
+                <h2 class="section-title">Segment-Level Effects (CATE)</h2>
                 
                 <div class="bar-chart">
                     <div class="bar-item">
                         <div class="bar-header">
-                            <span><strong>High Value</strong> (8,110 customers)</span>
+                            <span><strong>High Value</strong> (8,110)</span>
                             <span style="color: #10b981; font-weight: 700;">0.256% <span class="ci-badge">[0.18%, 0.33%]</span></span>
                         </div>
                         <div class="bar-bg">
                             <div class="bar-fill" style="width: 100%; background: linear-gradient(90deg, #10b981, #059669);">
-                                $10.40/customer
+                                $10.40
                             </div>
                         </div>
                     </div>
                     
                     <div class="bar-item">
                         <div class="bar-header">
-                            <span><strong>Low Value</strong> (19,801 customers)</span>
+                            <span><strong>Low Value</strong> (19,801)</span>
                             <span style="color: #3b82f6; font-weight: 700;">0.216% <span class="ci-badge">[0.16%, 0.27%]</span></span>
                         </div>
                         <div class="bar-bg">
                             <div class="bar-fill" style="width: 84%; background: linear-gradient(90deg, #3b82f6, #2563eb);">
-                                $10.80/customer
+                                $10.80
                             </div>
                         </div>
                     </div>
                     
                     <div class="bar-item">
                         <div class="bar-header">
-                            <span><strong>Medium Value</strong> (31,956 customers)</span>
+                            <span><strong>Medium</strong> (31,956)</span>
                             <span style="color: #f59e0b; font-weight: 700;">0.148% <span class="ci-badge">[0.10%, 0.19%]</span></span>
                         </div>
                         <div class="bar-bg">
                             <div class="bar-fill" style="width: 58%; background: linear-gradient(90deg, #f59e0b, #d97706);">
-                                $7.40/customer
+                                $7.40
                             </div>
                         </div>
                     </div>
                     
                     <div class="bar-item">
                         <div class="bar-header">
-                            <span><strong>VIP</strong> (4,133 customers)</span>
+                            <span><strong>VIP</strong> (4,133)</span>
                             <span style="color: #64748b; font-weight: 700;">0.091% <span class="ci-badge">[0.04%, 0.14%]</span></span>
                         </div>
                         <div class="bar-bg">
                             <div class="bar-fill" style="width: 36%; background: linear-gradient(90deg, #64748b, #475569);">
-                                $4.55/customer
+                                $4.55
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <h3 style="font-size: 1.5rem; margin: 2.5rem 0 1.5rem; color: #fff;">Targeting Strategy Comparison</h3>
+                <h3 style="font-size: 1.2rem; margin: 2rem 0 1rem; color: #fff;">Targeting Strategy</h3>
                 
-                <table class="data-table">
-                    <thead>
-                        <tr>
-                            <th>Strategy</th>
-                            <th>Reach</th>
-                            <th>Conversions</th>
-                            <th>Revenue</th>
-                            <th>Cost</th>
-                            <th>ROI</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><strong>Current (Blanket)</strong></td>
-                            <td>42,790</td>
-                            <td>62</td>
-                            <td>$3,100</td>
-                            <td>$4,279</td>
-                            <td style="color: #ef4444; font-weight: 700;">-27.6%</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Targeted (High+Low)</strong></td>
-                            <td>27,911</td>
-                            <td>135</td>
-                            <td>$6,750</td>
-                            <td>$2,791</td>
-                            <td style="color: #10b981; font-weight: 700;">+142%</td>
-                        </tr>
-                        <tr style="background: rgba(16, 185, 129, 0.1);">
-                            <td><strong>Improvement</strong></td>
-                            <td>-35%</td>
-                            <td style="color: #10b981;">+118%</td>
-                            <td style="color: #10b981;">+118%</td>
-                            <td style="color: #10b981;">-35%</td>
-                            <td style="color: #10b981; font-weight: 700;">+170pp</td>
-                        </tr>
-                    </tbody>
-                </table>
+                <div style="overflow-x: auto;">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Strategy</th>
+                                <th>Reach</th>
+                                <th>Revenue</th>
+                                <th>Cost</th>
+                                <th>ROI</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Blanket</strong></td>
+                                <td>42,790</td>
+                                <td>$3,100</td>
+                                <td>$4,279</td>
+                                <td style="color: #ef4444; font-weight: 700;">-27.6%</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Targeted</strong></td>
+                                <td>27,911</td>
+                                <td>$6,750</td>
+                                <td>$2,791</td>
+                                <td style="color: #10b981; font-weight: 700;">+142%</td>
+                            </tr>
+                            <tr style="background: rgba(16, 185, 129, 0.1);">
+                                <td><strong>Improvement</strong></td>
+                                <td>-35%</td>
+                                <td style="color: #10b981;">+118%</td>
+                                <td style="color: #10b981;">-35%</td>
+                                <td style="color: #10b981; font-weight: 700;">+170pp</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
 
                 <div class="insight-box">
                     <div class="insight-title">🎯 Targeting Decision</div>
-                    <p style="line-height: 1.7; font-size: 0.95rem;">
-                        <strong>Why VIPs underperform:</strong> Already highly engaged (1.09% baseline conversion). Email provides minimal incremental value.<br><br>
-                        <strong>Why High/Low respond:</strong> Price-sensitive segments with lower baseline engagement (0.80-0.95% conversion). Promotional emails drive significant lift.<br><br>
-                        <strong>Expected outcome:</strong> Deploy uplift model for real-time scoring. Target customers with predicted uplift >0.15%. Expected ROI improvement: +170pp (from -27.6% to +142%).
+                    <p>
+                        <strong>Why VIPs underperform:</strong> Already highly engaged (1.09% baseline). Email provides minimal value.<br><br>
+                        <strong>Why High/Low respond:</strong> Price-sensitive segments with lower baseline. Promotional emails drive significant lift.<br><br>
+                        <strong>Expected outcome:</strong> Deploy uplift model for real-time scoring. Target predicted uplift >0.15%. ROI improvement: +170pp.
                     </p>
                 </div>
             </div>
@@ -877,22 +966,22 @@
         <!-- Methods Tab -->
         <div id="methods-content" class="hidden">
             <div class="content-card">
-                <h2 class="section-title">Automated Experimentation Pipeline</h2>
+                <h2 class="section-title">Automated Pipeline</h2>
                 
-                <div style="background: rgba(59, 130, 246, 0.1); border-left: 3px solid #3b82f6; padding: 2rem; border-radius: 8px; margin: 2rem 0;">
-                    <h3 style="font-size: 1.2rem; margin-bottom: 1rem; color: #60a5fa;">🔄 Reusable Framework Components</h3>
-                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-top: 1rem;">
+                <div style="background: rgba(59, 130, 246, 0.1); border-left: 3px solid #3b82f6; padding: 1.5rem; border-radius: 8px; margin: 1.5rem 0;">
+                    <h3 style="font-size: 1.1rem; margin-bottom: 1rem; color: #60a5fa;">🔄 Framework Components</h3>
+                    <div style="display: grid; gap: 1.25rem;">
                         <div>
                             <div style="font-weight: 700; margin-bottom: 0.5rem;">1. Data Ingestion</div>
-                            <div style="font-size: 0.85rem; color: #94a3b8;">
+                            <div style="font-size: 0.8rem; color: #94a3b8;">
                                 • CSV upload interface<br>
                                 • Schema validation<br>
-                                • Automated feature engineering
+                                • Feature engineering
                             </div>
                         </div>
                         <div>
                             <div style="font-weight: 700; margin-bottom: 0.5rem;">2. Causal Estimation</div>
-                            <div style="font-size: 0.85rem; color: #94a3b8;">
+                            <div style="font-size: 0.8rem; color: #94a3b8;">
                                 • PSM with auto-tuning<br>
                                 • Balance diagnostics<br>
                                 • CI computation
@@ -900,7 +989,7 @@
                         </div>
                         <div>
                             <div style="font-weight: 700; margin-bottom: 0.5rem;">3. Uplift Scoring</div>
-                            <div style="font-size: 0.85rem; color: #94a3b8;">
+                            <div style="font-size: 0.8rem; color: #94a3b8;">
                                 • T-Learner implementation<br>
                                 • Segment-level CATE<br>
                                 • Real-time predictions
@@ -908,7 +997,7 @@
                         </div>
                         <div>
                             <div style="font-weight: 700; margin-bottom: 0.5rem;">4. Reporting</div>
-                            <div style="font-size: 0.85rem; color: #94a3b8;">
+                            <div style="font-size: 0.8rem; color: #94a3b8;">
                                 • Interactive dashboard<br>
                                 • Automated export<br>
                                 • Decision recommendations
@@ -917,35 +1006,33 @@
                     </div>
                 </div>
 
-                <h3 style="font-size: 1.3rem; margin: 2rem 0 1rem; color: #fff;">Method Details</h3>
+                <h3 style="font-size: 1.2rem; margin: 2rem 0 1rem; color: #fff;">Method Details</h3>
                 
-                <div style="background: rgba(255, 255, 255, 0.02); padding: 2rem; border-radius: 12px; margin: 1.5rem 0;">
-                    <h4 style="font-size: 1.1rem; margin-bottom: 1rem; color: #fff;">Propensity Score Matching (PSM)</h4>
-                    <p style="color: #94a3b8; line-height: 1.7;">
-                        <strong>Implementation:</strong> Logistic regression for propensity estimation → Nearest neighbor matching (caliper=0.05) → Balance validation<br>
-                        <strong>Purpose:</strong> Estimate ATT by comparing similar customers, eliminating selection bias<br>
-                        <strong>Result:</strong> 0.14% causal lift (95% CI: [0.09%, 0.19%], p=0.023)<br>
+                <div style="background: rgba(255, 255, 255, 0.02); padding: 1.5rem; border-radius: 12px; margin: 1.25rem 0;">
+                    <h4 style="font-size: 1rem; margin-bottom: 0.75rem; color: #fff;">Propensity Score Matching</h4>
+                    <p style="color: #94a3b8; font-size: 0.85rem; line-height: 1.7;">
+                        <strong>Implementation:</strong> Logistic regression → NN matching (caliper=0.05) → Balance validation<br>
+                        <strong>Result:</strong> 0.14% [0.09%, 0.19%], p=0.023<br>
                         <strong>Use case:</strong> Overall campaign ROI decisions
                     </p>
                 </div>
 
-                <div style="background: rgba(255, 255, 255, 0.02); padding: 2rem; border-radius: 12px; margin: 1.5rem 0;">
-                    <h4 style="font-size: 1.1rem; margin-bottom: 1rem; color: #fff;">Uplift Modeling (T-Learner)</h4>
-                    <p style="color: #94a3b8; line-height: 1.7;">
-                        <strong>Implementation:</strong> Separate Random Forest models for treatment/control → Predict uplift per customer → Aggregate by segment<br>
-                        <strong>Purpose:</strong> Identify heterogeneous effects for targeting<br>
-                        <strong>Result:</strong> 2.8x variation across segments (0.091% to 0.256%)<br>
-                        <strong>Use case:</strong> Customer targeting and campaign optimization
+                <div style="background: rgba(255, 255, 255, 0.02); padding: 1.5rem; border-radius: 12px; margin: 1.25rem 0;">
+                    <h4 style="font-size: 1rem; margin-bottom: 0.75rem; color: #fff;">Uplift Modeling (T-Learner)</h4>
+                    <p style="color: #94a3b8; font-size: 0.85rem; line-height: 1.7;">
+                        <strong>Implementation:</strong> Separate RF models → Predict uplift → Aggregate by segment<br>
+                        <strong>Result:</strong> 2.8x variation (0.091% to 0.256%)<br>
+                        <strong>Use case:</strong> Customer targeting and optimization
                     </p>
                 </div>
 
                 <div class="insight-box">
                     <div class="insight-title">🏗️ Production Architecture</div>
-                    <p style="line-height: 1.7; font-size: 0.95rem;">
-                        <strong>Deployment:</strong> Flask API + Redis caching + PostgreSQL for experiment metadata<br>
-                        <strong>Real-time scoring:</strong> Uplift model deployed as microservice, latency &lt;50ms<br>
-                        <strong>Automation:</strong> Nightly batch jobs for new experiments, Slack alerts for significant findings<br>
-                        <strong>Monitoring:</strong> Drift detection, A/A tests for validation, automated balance checks
+                    <p>
+                        <strong>Deployment:</strong> Flask API + Redis + PostgreSQL<br>
+                        <strong>Real-time scoring:</strong> <50ms latency<br>
+                        <strong>Automation:</strong> Nightly batch jobs + Slack alerts<br>
+                        <strong>Monitoring:</strong> Drift detection + A/A validation
                     </p>
                 </div>
             </div>
@@ -954,16 +1041,16 @@
 
     <footer>
         <div style="max-width: 1300px; margin: 0 auto;">
-            <p style="color: #64748b; font-size: 0.95rem;">
-                Production Causal Inference • Automated Experimentation • Real-Time Decision Support
+            <p style="color: #64748b;">
+                Production Causal Inference • Automated Experimentation
             </p>
-            <p style="color: #475569; margin-top: 1rem; font-size: 0.85rem;">
+            <p style="color: #475569; margin-top: 0.75rem; font-size: 0.8rem;">
                 Based on Hillstrom Email Marketing Dataset (64,000 customers)
             </p>
             <div class="creator">
-                <p style="color: #94a3b8; font-size: 0.9rem;">Created & Developed by</p>
+                <p style="color: #94a3b8; font-size: 0.85rem;">Created & Developed by</p>
                 <p class="creator-name">Abhir Iyer</p>
-                <p style="font-size: 0.85rem; margin-top: 0.5rem; color: #64748b;">
+                <p style="font-size: 0.8rem; margin-top: 0.5rem; color: #64748b;">
                     Data Scientist • Causal Inference • Production ML
                 </p>
             </div>
@@ -971,7 +1058,7 @@
     </footer>
 
     <script>
-        const BASE_LIFT = 0.0014; // 0.14%
+        const BASE_LIFT = 0.0014;
         const BASE_SIZE = 42790;
         
         function showTab(name) {
@@ -979,6 +1066,11 @@
             document.querySelectorAll('.tab').forEach(el => el.classList.remove('active'));
             document.getElementById(name + '-content').classList.remove('hidden');
             event.target.classList.add('active');
+            
+            // Scroll to top of content on mobile
+            if (window.innerWidth < 768) {
+                document.querySelector('.content-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
         }
         
         function updateROI() {
@@ -990,12 +1082,10 @@
             const arpu = parseFloat(arpuSlider.value);
             const shrinkage = parseFloat(shrinkSlider.value) / 100;
             
-            // Update displays
             document.getElementById('cost-display').textContent = cost.toFixed(2);
             document.getElementById('arpu-display').textContent = arpu;
             document.getElementById('shrink-display').textContent = (shrinkage * 100).toFixed(0);
             
-            // Calculate metrics with shrinkage
             const adjustedLift = BASE_LIFT * (1 - shrinkage);
             const conversions = Math.round(BASE_SIZE * adjustedLift);
             const revenue = conversions * arpu;
@@ -1003,7 +1093,6 @@
             const profit = revenue - totalCost;
             const roi = ((revenue / totalCost) - 1) * 100;
             
-            // Update ROI display
             const roiElement = document.getElementById('roi-value');
             roiElement.textContent = roi.toFixed(1) + '%';
             roiElement.style.color = roi > 0 ? '#10b981' : '#ffffff';
@@ -1013,23 +1102,21 @@
             document.getElementById('conv-val').textContent = conversions;
             document.getElementById('profit-val').textContent = Math.round(profit).toLocaleString();
             
-            // Update top stats
             document.getElementById('stat-revenue').textContent = '$' + Math.round(revenue).toLocaleString();
             const statROI = document.getElementById('stat-roi');
             statROI.textContent = roi.toFixed(1) + '%';
             statROI.style.color = roi > 0 ? '#10b981' : '#ef4444';
             
-            // Update sensitivity insight
             const breakEvenCost = (revenue / BASE_SIZE).toFixed(3);
             const breakEvenARPU = Math.ceil(totalCost / conversions);
             
             document.getElementById('sensitivity-insight').innerHTML = `
                 At current parameters (cost=$${cost.toFixed(2)}, ARPU=$${arpu}, shrinkage=${(shrinkage*100).toFixed(0)}%), 
                 campaign ${roi > 0 ? '<strong style="color: #10b981">generates positive ROI</strong>' : '<strong style="color: #ef4444">loses money</strong>'}. 
-                Break-even requires either:<br>
+                Break-even requires:<br>
                 • Cost reduction to <strong>$${breakEvenCost}/email</strong><br>
                 • ARPU increase to <strong>$${breakEvenARPU}</strong><br>
-                • Or better targeting (High+Low segments: +142% ROI)
+                • Or better targeting (High+Low: +142% ROI)
             `;
         }
         
@@ -1053,9 +1140,8 @@
             alert('📊 Report exported! In production, this would generate a full PDF with all diagnostics.');
         }
         
-        // Initialize
         updateROI();
-        console.log('🎯 Causal-Flow by Abhir Iyer • Production-Grade Analytics');
+        console.log('🎯 Causal-Flow by Abhir Iyer • Mobile-Optimized');
     </script>
 </body>
 </html>
